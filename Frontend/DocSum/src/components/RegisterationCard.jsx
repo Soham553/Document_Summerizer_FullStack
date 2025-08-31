@@ -1,19 +1,38 @@
 import { useState } from "react";
 import {useAuth} from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function SignupForm() {
 
     const [email, setEmail] = useState("");
+    const [fullName, setfullName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     
     const { register } = useAuth();
     const handlesubmit = async (e) => {
-        e.preventDefault();
-        await register(email, username, password);
+      e.preventDefault();
+      try {
+      const res = await fetch("http://127.0.0.1:3000/docsum/user/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, fullName, username }),
+      });
+      console.log(res)
+      if (res.ok) {
+        // ✅ Login successful → navigate
+        navigate("/DocumentSummaryUploader");  
+      } else {
+        alert("Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
     }
+  };
+    
 
   return (
     <div className="bg-gray-900 flex items-center justify-center min-h-screen">
@@ -59,6 +78,17 @@ export default function SignupForm() {
              <input type="text" placeholder="username"
               onChange={(e) => setUsername(e.target.value)}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 border border-gray-600 text-gray-200 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+          </div>
+           <div>
+            <label className="block mb-1 text-sm font-medium text-gray-300">
+              fullName
+            </label>
+            <input
+              onChange={(e) => setfullName(e.target.value)}
+              type="text"
+              placeholder="Enter Full Name"
+              className="w-full px-3 py-2 rounded-lg bg-gray-700 border border-gray-600 text-gray-200 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
           </div>
           <div>
             <label className="block mb-1 text-sm font-medium text-gray-300">

@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import LoginPage from './components/Login.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
-
+import { DocumentSummaryUploader } from './components/chatfield.jsx'
 let router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +20,9 @@ let router = createBrowserRouter([
   },{
     path: "/login",
     Component: LoginPage
+  },{
+    path: "/DocumentSummaryUploader",
+    Component: DocumentSummaryUploader
   }
 ]);
 
