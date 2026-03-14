@@ -34,7 +34,7 @@ export const uploadDocument = asyncHandler(async (req, res) => {
   const newDocument = Document.create({
     name: req.files.file[0].originalname,
     link: result.secure_url,
-    userId: req.user._id,
+    // userId: req.user._id,
   });
 
   fs.unlinkSync(req.files.file[0].path);

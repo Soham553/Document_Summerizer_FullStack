@@ -1,12 +1,14 @@
 import os
 import tempfile
 from fastapi import FastAPI, UploadFile, File
+from concurrent.futures import ProcessPoolExecutor
 from services.file_utils import extract_paragraphs
 from services.summarizer import summarize_file
 from services.embeddings import map_summary_to_paragraphs
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
 
 app.add_middleware(
     CORSMiddleware,

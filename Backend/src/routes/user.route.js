@@ -9,15 +9,15 @@ const router = Router()
 
 router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
-router.route("/logout").post(verfiyjwt ,logout)
+router.route("/logout").post(verfiyjwt, logout)
 
-router.route("/file").post(verfiyjwt, upload.fields([
-        {
-            name : "file",
-            maxCount : 1
-        }]),
-        uploadDocument
-    )
+router.route("/file").post(upload.fields([
+    {
+        name: "file",
+        maxCount: 1
+    }]),
+    uploadDocument
+)
 
 
 export default router;
