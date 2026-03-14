@@ -9,24 +9,23 @@ import {
 } from "react-router-dom";
 import LoginPage from './components/Login.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
-import { DocumentSummaryUploader } from './components/chatfield.jsx'
+import DocumentSummaryUploader from './components/chatfield.jsx';
 let router = createBrowserRouter([
   {
     path: "/",
     Component: App,
-  },{
+  }, {
     path: "/register",
     Component: SignupForm,
-  },{
+  }, {
     path: "/login",
     Component: LoginPage
-  },{
+  }, {
     path: "/DocumentSummaryUploader",
     Component: DocumentSummaryUploader
   }
 ]);
-
-createRoot(root).render(
+ateRoot(root).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
